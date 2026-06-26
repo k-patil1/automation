@@ -10,5 +10,7 @@ test.only('first playwrite test', async ({browser})=>
    await page.locator('input#password').fill('learning');
     await page.locator('input#signInBtn').click();
     await page.locator('output#signInBtn').click();
+    await page.locator('output1#signInBtn').click();
+
 
 })
