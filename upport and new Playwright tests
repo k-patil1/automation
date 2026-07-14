@@ -1,0 +1,97 @@
+[1mdiff --git a/.dockerignore b/.dockerignore[m
+[1mnew file mode 100644[m
+[1mindex 0000000..5e42165[m
+[1m--- /dev/null[m
+[1m+++ b/.dockerignore[m
+[36m@@ -0,0 +1,5 @@[m
+[32m+[m[32mnode_modules[m
+[32m+[m[32mplaywright-report[m
+[32m+[m[32mtest-results[m
+[32m+[m[32m.git[m
+[32m+[m[32m.gitignore[m
+\ No newline at end of file[m
+[1mdiff --git a/Dockerfile b/Dockerfile[m
+[1mnew file mode 100644[m
+[1mindex 0000000..c299900[m
+[1m--- /dev/null[m
+[1m+++ b/Dockerfile[m
+[36m@@ -0,0 +1,11 @@[m
+[32m+[m[32mFROM mcr.microsoft.com/playwright:v1.59.1-noble[m
+[32m+[m
+[32m+[m[32mWORKDIR /app[m
+[32m+[m
+[32m+[m[32mCOPY package*.json ./[m
+[32m+[m
+[32m+[m[32mRUN npm install[m
+[32m+[m
+[32m+[m[32mCOPY . .[m
+[32m+[m
+[32m+[m[32mCMD ["npx", "playwright", "test"][m
+\ No newline at end of file[m
+[1mdiff --git a/playwright.config.js b/playwright.config.js[m
+[1mindex 96087d9..90889a1 100644[m
+[1m--- a/playwright.config.js[m
+[1m+++ b/playwright.config.js[m
+[36m@@ -24,7 +24,7 @@[m [mconst config=([m
+ [m
+   use: {[m
+     browserName: 'chromium',[m
+[31m-    headless: false,[m
+[32m+[m[32m    headless: true,[m
+   },[m
+   });[m
+ [m
+[1mdiff --git a/tests/UIBasics.spec.js b/tests/UIBasics.spec.js[m
+[1mindex 70ae72e..fc113cf 100644[m
+[1m--- a/tests/UIBasics.spec.js[m
+[1m+++ b/tests/UIBasics.spec.js[m
+[36m@@ -1,18 +1,18 @@[m
+[31m-const {test} = require('@playwright/test');[m
+[31m-const { only } = require('node:test');[m
+[32m+[m[32mconst { test, expect } = require('@playwright/test');[m
+ [m
+[31m-test.only('first playwrite test', async ({browser})=>[m
+[32m+[m[32mtest('first playwrite test', async ({browser})=>[m
+ {[m
+    const context = await browser.newContext();[m
+    const page = await context.newPage();[m
+[31m-   await page.goto('https://rahulshettyacademy.com/loginpagePractise/');[m
+[31m-   await page.locator('#username').fill('rahulshettyacademy');[m
+[31m-   await page.locator('input#password').fill('learning');[m
+[31m-    await page.locator('input#signInBtn').click();[m
+[31m-    await page.locator('output#signInBtn').click();[m
+[31m-    //git checkout main[m
+[31m-    await page.locator('output1#signInBtn').click();[m
+[31m-    await page.locator('output2#signInBtn').click();[m
+[32m+[m[32m    await page.goto('https://rahulshettyacademy.com/loginpagePractise/');[m
+[32m+[m[32m        await page.locator('#username').fill('rahulshettyacademy');[m
+[32m+[m[32m        await page.locator('input#password').fill('learning');[m
+[32m+[m[32m        await page.locator('#signInBtn').click();[m
+[32m+[m
+[32m+[m[32m       // await expect(page).toHaveURL(/shop/);[m
+ [m
+ [m
+ })[m
+[41m+[m
+[41m+[m
+[41m+[m
+[1mdiff --git a/tests/learn.spec.js b/tests/learn.spec.js[m
+[1mnew file mode 100644[m
+[1mindex 0000000..aab30b2[m
+[1m--- /dev/null[m
+[1m+++ b/tests/learn.spec.js[m
+[36m@@ -0,0 +1,13 @@[m
+[32m+[m[32m// import { test, expect } from '@playwright/test';[m
+[32m+[m
+[32m+[m[32m// test.only('sample test 1', async ({ page }) => {[m
+[32m+[m[32m//     await page.goto('https://google.com');[m
+[32m+[m[32m// });[m
+[32m+[m
+[32m+[m[32m// test('sample test 2', async ({ page }) => {[m
+[32m+[m[32m//     await page.goto('https://github.com');[m
+[32m+[m[32m// });[m
+[32m+[m
+[32m+[m[32m// test('sample test 3', async ({ page }) => {[m
+[32m+[m[32m//     await page.goto('https://stackoverflow.com');[m
+[32m+[m[32m// });[m
+\ No newline at end of file[m
