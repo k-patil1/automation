@@ -9,6 +9,7 @@ test('first playwrite test', async ({browser})=>
         await page.locator('#username').fill(ENV.username);
         await page.locator('input#password').fill(ENV.password);
         await page.locator('#signInBtn').click();
+        
 
        // await expect(page).toHaveURL(/shop/);
 
